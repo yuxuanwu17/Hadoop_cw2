@@ -25,7 +25,7 @@ public class java_test {
 
 
     public static void main(String[] args) {
-        String del = " DELIMITER ";
+//        String del = " DELIMITER ";
 //        String del = "";
         ArrayList<String> bigrams = new ArrayList<String>();
         ArrayList<String> processed_data = new ArrayList<String>();
@@ -36,15 +36,12 @@ public class java_test {
         while (itr.hasMoreTokens()) {
             String s = itr.nextToken();
             s = s.toLowerCase();
-            s = s.replaceAll("\\?", del);
-            s = s.replaceAll("\\.", del);
-            s = s.replaceAll("!", del);
-            s = s.replaceAll(",", " ");
-            s = s.replaceAll("'", "");
-            s = s.replaceAll("[^\\w]", " ");
-            s = s.replaceAll("[^\\D]", " ");
+            s = deleteNotation(s);
             processed_data.add(s);
+        }
 
+        for (String datum : processed_data) {
+            System.out.println(datum);
         }
 
     }
