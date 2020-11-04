@@ -16,11 +16,16 @@ public class java_test {
             "COMMERCIALLY.  PROHIBITED COMMERCIAL DISTRIBUTION INCLUDES BY ANY\n" +
             "SERVICE THAT CHARGES FOR DOWNLOAD TIME OR FOR MEMBERSHIP";
 
-    public static String deleteNotation(String words) {
-        String regEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].-<>/?~@#%……&*--+|{}\"'[0-9]]";
-        Pattern p = Pattern.compile(regEx);
-        Matcher matcher = p.matcher(words);
-        return matcher.replaceAll("").trim();
+    public static String deleteNotation(String s) {
+        s = s.toLowerCase();
+        s = s.replaceAll("\\?", "");
+        s = s.replaceAll("\\.", "");
+        s = s.replaceAll("!", "");
+        s = s.replaceAll(",", " ");
+        s = s.replaceAll("'", "");
+        s = s.replaceAll("[^\\w]", " ");
+        s = s.replaceAll("[^\\D]", " ");
+        return s;
     }
 
 
