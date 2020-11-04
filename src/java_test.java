@@ -16,38 +16,33 @@ public class java_test {
             "COMMERCIALLY.  PROHIBITED COMMERCIAL DISTRIBUTION INCLUDES BY ANY\n" +
             "SERVICE THAT CHARGES FOR DOWNLOAD TIME OR FOR MEMBERSHIP";
 
-    public static String deleteNotation(String s) {
-        s = s.toLowerCase();
-        s = s.replaceAll("\\?", "");
-        s = s.replaceAll("\\.", "");
-        s = s.replaceAll("!", "");
-        s = s.replaceAll(",", " ");
-        s = s.replaceAll("'", "");
-        s = s.replaceAll("[^\\w]", " ");
-        s = s.replaceAll("[^\\D]", " ");
-        return s;
+    public static String deleteNotation(String words) {
+        String regEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].-<>/?~@#%……&*--+|{}\"'[0-9]]";
+        Pattern p = Pattern.compile(regEx);
+        Matcher matcher = p.matcher(words);
+        return matcher.replaceAll("").trim();
     }
 
 
     public static void main(String[] args) {
-//        String del = " DELIMITER ";
-//        String del = "";
         ArrayList<String> bigrams = new ArrayList<String>();
-        ArrayList<String> processed_data = new ArrayList<String>();
-        StringTokenizer itr = new StringTokenizer(text);
-        String s1 = "";
-        String s2 = "";
-        String s3 = "";
-        while (itr.hasMoreTokens()) {
-            String s = itr.nextToken();
-            s = s.toLowerCase();
-            s = deleteNotation(s);
-            processed_data.add(s);
+        String[] single_word = text.split("\\s+");
+
+        for (int i = 0; i < single_word.length - 1; i++) {
+//            System.out.println(single_word[i]);
+            single_word[i] = deleteNotation(single_word[i]);
+            single_word[i + 1] = deleteNotation(single_word[i + 1]);
+            if (!(single_word[i].isEmpty()) && !(single_word[i + 1].isEmpty())) {
+                bigrams.add(single_word[i] + " " + single_word[i + 1]);
+            }
+
         }
 
-        for (String datum : processed_data) {
+        for (String datum : bigrams) {
             System.out.println(datum);
         }
 
     }
 }
+
+
