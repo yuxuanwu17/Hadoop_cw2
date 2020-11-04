@@ -1,6 +1,6 @@
 import java.io.IOException;
 import java.util.StringTokenizer;
-
+import java.util.*;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -43,12 +43,38 @@ public class WordCount {
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
             //1: 将一行的文本数据进行拆分
+            StringTokenizer tokens = new StringTokenizer(value.toString());
+//            String txt_content = value.toString();
+//            String [] each_word = txt_content.split("\\s+");
+
+
             //2：遍历数组，组装k2和v2
             //3：将k2 和v2 写入下文（context）
 
-            StringTokenizer itr = new StringTokenizer(value.toString());
-            while (itr.hasMoreTokens()) {
-                word.set(itr.nextToken());
+            while (tokens.hasMoreTokens()) {
+                String s = tokens.nextToken();
+                String del = "DELIMIT";
+                //process the token
+                s = s.toLowerCase();
+
+                //maintain placeholders for sentence-delimiters
+                s = s.replaceAll("\\?", del);
+                s = s.replaceAll("!", del);
+                s = s.replaceAll("\\.", del);
+
+                //nuke all non-word characters
+                s = s.replaceAll("[^\\w]", " ");
+                s = s.replaceAll("_", " ");
+
+                //use a period for the delimit (not really necessary)
+                s = s.replaceAll(del, " . ");
+
+                //nuke any extra whitespace (not really necessary)
+                s = s.replaceAll("\\s+", " ");
+
+                //split by spaces
+                String arr[] = s.split(" ");
+                word.set(tokens.nextToken());
                 context.write(word, one);
             }
         }

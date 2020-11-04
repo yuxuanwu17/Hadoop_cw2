@@ -7,5 +7,80 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/common" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/common/jdiff" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/common" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/tools" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/client" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/client" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/mapreduce" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/mapreduce/jdiff" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/mapreduce" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/yarn" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/yarn" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/hdfs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/hdfs/jdiff" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/hdfs" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/common/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$USER_HOME$/IdeaProjects/hadoop_test/lib/common/lib" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
