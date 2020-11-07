@@ -20,7 +20,7 @@ public class WordCount {
         Job job = Job.getInstance(conf, "Bigram count");
         job.setJarByClass(WordCount.class); //My class name is 'word count'
         job.setMapperClass(TokenizerMapper.class); // Set my Mapper class
-
+//        job.setCombinerClass(TokenizerMapper.IntSumReducer.class); // Set my Combiner class
         job.setReducerClass(TokenizerMapper.IntSumReducer.class); // Set my Reducer class
         job.setOutputKeyClass(Text.class); // Set the key class for my output class
         job.setOutputValueClass(IntWritable.class); // Set the value class for the output data
@@ -36,37 +36,14 @@ public class WordCount {
         private final static IntWritable one = new IntWritable(1);
         private Text word = new Text();
 
-        public String deleteNotation(String words) {
-            String regEx = "[\\W[0-9]]";
-
-            Pattern p = Pattern.compile(regEx);
-            Matcher matcher = p.matcher(words);
-            return matcher.replaceAll("").trim();
-        }
-
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
             ArrayList<String> bigrams = new ArrayList<String>();
             String[] single_word = value.toString().split("\\s+");
-
-            for (int i = 0; i < single_word.length - 1; i++) {
-                // note that, in this case we should constrain the text length into length -1
-                // since this is the bigram case, there is length - 1 bigram words in total
-                // otherwise, it could case break the string
-                single_word[i] = deleteNotation(single_word[i]);
-                single_word[i + 1] = deleteNotation(single_word[i + 1]);
-                if (!(single_word[i].isEmpty()) && !(single_word[i + 1].isEmpty())) {
-                    bigrams.add(single_word[i] + " " + single_word[i + 1]);
-                }
-
-            }
-            for (String token : bigrams) {
-//                System.out.print(token);
+            for (String token : single_word) {
                 word.set(token);
                 context.write(word, one);
-                // seventh STEP: context is aimed to collect Mapper output pairs. So, context.write(key, value) Add a (key, value) pair to the context context.write(word, ONE);
             }
-
         }
 
         public static class IntSumReducer
