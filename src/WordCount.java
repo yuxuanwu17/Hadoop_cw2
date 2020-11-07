@@ -15,13 +15,27 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class WordCount {
 
+    public static void main(String[] args) throws Exception {
+        Configuration conf = new Configuration();
+        Job job = Job.getInstance(conf, "Bigram count");
+        job.setJarByClass(WordCount.class); //My class name is 'word count'
+        job.setMapperClass(TokenizerMapper.class); // Set my Mapper class
+
+        job.setReducerClass(TokenizerMapper.IntSumReducer.class); // Set my Reducer class
+        job.setOutputKeyClass(Text.class); // Set the key class for my output class
+        job.setOutputValueClass(IntWritable.class); // Set the value class for the output data
+
+        FileInputFormat.addInputPath(job, new Path(args[0]));
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        System.exit(job.waitForCompletion(true) ? 0 : 1);
+    }
+
     public static class TokenizerMapper
             extends Mapper<Object, Text, Text, IntWritable> {
 
         private final static IntWritable one = new IntWritable(1);
         private Text word = new Text();
 
-        // This is the method
         public String deleteNotation(String words) {
             String regEx = "[\\W[0-9]]";
 
@@ -29,10 +43,9 @@ public class WordCount {
             Matcher matcher = p.matcher(words);
             return matcher.replaceAll("").trim();
         }
-//        This is the mapping method
+
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
-
             ArrayList<String> bigrams = new ArrayList<String>();
             String[] single_word = value.toString().split("\\s+");
 
@@ -48,11 +61,12 @@ public class WordCount {
 
             }
             for (String token : bigrams) {
-                System.out.print(token);
+//                System.out.print(token);
                 word.set(token);
-                context.write(word,one);
+                context.write(word, one);
                 // seventh STEP: context is aimed to collect Mapper output pairs. So, context.write(key, value) Add a (key, value) pair to the context context.write(word, ONE);
             }
+
         }
 
         public static class IntSumReducer
@@ -72,20 +86,6 @@ public class WordCount {
             }
         }
 
-        public static void main(String[] args) throws Exception {
-            Configuration conf = new Configuration();
-            Job job = Job.getInstance(conf, "Bigram count");
-            job.setJarByClass(WordCount.class); //My class name is 'word count'
-            job.setMapperClass(TokenizerMapper.class); // Set my Mapper class
-            job.setCombinerClass(IntSumReducer.class); // Set my Combiner class
-            job.setReducerClass(IntSumReducer.class); // Set my Reducer class
-            job.setOutputKeyClass(Text.class); // Set the key class for my output class
-            job.setOutputValueClass(IntWritable.class); // Set the value class for the output data
 
-
-            FileInputFormat.addInputPath(job, new Path(args[0]));
-            FileOutputFormat.setOutputPath(job, new Path(args[1]));
-            System.exit(job.waitForCompletion(true) ? 0 : 1);
-        }
     }
 }
