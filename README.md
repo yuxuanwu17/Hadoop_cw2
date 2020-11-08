@@ -1,5 +1,10 @@
 ## Hadoop
 
+Hadoop comprises three part:
+1. Main function, including some basic configuration of job
+2. Mapper class, inherited from and override the Map function
+3. Reduce class, inherited from Reduce function and override it
+
 ### 1. Calculate the bigram frequency and return the Top 10
 ---
 #### data cleaning part (single world)
@@ -16,4 +21,12 @@
 - Note that: since we are calculating the bigram, the length should be length(single_word)-1
 - We also need to ensure that the first and last were not empty
 - Then add the data to the newly created Arraylist
+
+### 2. Return the line containing the word 'torture'
+- Use regular expression to separate line and store it in to the list
+- The regular expression was written as {\\\n{1,}}, detecting the "\n" and store it as one line 
+- Create an arraylist results to each line 
+- Loop through the arraylist and use .contain function to find the line contain "torture"
+- Note that, the mapper variable and reduce variable should be switched to Text, the attribute problem should take it seriously
+
 
