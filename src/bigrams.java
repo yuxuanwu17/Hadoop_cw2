@@ -20,13 +20,18 @@ public class bigrams {
         String regEx = "[\\W[0-9]&&[^\']]";
         Pattern p = Pattern.compile(regEx);
         Matcher matcher = p.matcher(words);
-        return matcher.replaceAll("").trim();
+        return matcher.replaceAll("");
+//        String deleted_words = matcher.replaceAll("").trim();
+//        String regEx_prime = "[\']";
+//        Pattern p2 = Pattern.compile(regEx_prime);
+//        Matcher macher2 = p2.matcher(deleted_words);
+//        return macher2.replaceAll(" ");
     }
 
 
     public static void main(String[] args) {
         ArrayList<String> bigrams = new ArrayList<String>();
-        String[] single_word = text.split("\\s+");
+        String[] single_word = text.split("[\\s+[\']]");
 
 //        for (String s : single_word) {
 //            String processed = deleteNotation(s);
