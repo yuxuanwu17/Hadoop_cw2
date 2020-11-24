@@ -21,7 +21,7 @@ Hadoop comprises three part:
 - Note that: since we are calculating the bigram, the length should be length(single_word)-1
 - We also need to ensure that the first and last were not empty
 - Then add the data to the newly created Arraylist
-
+---
 ### 2. Return the line containing the word 'torture'
 - Use regular expression to separate line and store it in to the list
 - The regular expression was written as {\\\n{1,}}, detecting the "\n" and store it as one line 
@@ -29,4 +29,11 @@ Hadoop comprises three part:
 - Loop through the arraylist and use .contain function to find the line contain "torture"
 - Note that, the mapper variable and reduce variable should be switched to Text, the attribute problem should take it seriously
 
+---
+### Results
 
+#### bigram frequency 
+![Alt text](https://github.com/yuxuanwu17/Hadoop_cw2/blob/chenck_method/figure%20/I(base)%20Yuxuan1nput%20hopezhus%20hadoop%20dfs%20-cat%20pa1990utputCM%C2%AE.png)
+
+#### lines containing "torture"
+![Alt text](https://github.com/yuxuanwu17/Hadoop_cw2/blob/chenck_method/figure%20/Shuffled%20Maps%20%3D1.png)
